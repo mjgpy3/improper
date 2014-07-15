@@ -10,7 +10,13 @@ describe '#generating' do
     describe '#number' do
       subject { generator.number }
 
+      it { is_expected.to be_a(Fixnum) }
+
+      context 'when told to generate a Fixnum' do
+        subject { generator.number(Fixnum) }
+
         it { is_expected.to be_a(Fixnum) }
+      end
     end
   end
 end

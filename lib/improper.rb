@@ -1,7 +1,7 @@
 def generating(quantity)
   thing = Object.new
 
-  def thing.number
+  def thing.number(of_type = Fixnum)
     42
   end
 
