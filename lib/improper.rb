@@ -4,8 +4,7 @@ class Generator
   end
 
   def number(of_type = Fixnum)
-    result = [of_type.eql?(Float) ? 42.42 : 42]
-    result
+    [of_type.eql?(Float) ? 42.42 : 42]
   end
 end
 
