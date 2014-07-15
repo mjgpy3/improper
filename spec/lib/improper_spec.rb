@@ -32,4 +32,14 @@ describe '#generating' do
       end
     end
   end
+
+  context 'when 2 items are being generated' do
+    let(:quantity) { 2 }
+
+    describe '#count' do
+      subject { generator.number.count }
+
+      it { is_expected.to eql(2) }
+    end
+  end
 end
