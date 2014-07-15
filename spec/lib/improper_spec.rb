@@ -12,16 +12,12 @@ describe '#generating' do
 
       it { is_expected.to be_a(Fixnum) }
 
-      context 'when told to generate a Fixnum' do
-        subject { generator.number(Fixnum) }
+      [Fixnum, Float].each do |type|
+        context "when told to generate a #{type}" do
+          subject { generator.number(type) }
 
-        it { is_expected.to be_a(Fixnum) }
-      end
-
-      context 'when told to generate a Float' do
-        subject { generator.number(Float) }
-
-        it { is_expected.to be_a(Float) }
+          it { is_expected.to be_a(type) }
+        end
       end
     end
   end
