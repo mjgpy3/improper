@@ -12,6 +12,7 @@ class NumericGenerator
   def initialize(quantity, type)
     @quantity = quantity
     @type = type
+    @lower_bound = @upper_bound = false
   end
 
   def above(lower_bound)
@@ -19,8 +20,14 @@ class NumericGenerator
     self
   end
 
+  def below(upper_bound)
+    @upper_bound = upper_bound
+    self
+  end
+
   def first
-    int = @lower_bound ? rand(0) + @lower_bound : 42
+    int = @upper_bound ? rand(@upper_bound-1) : 42
+    int = @lower_bound ? rand(@upper_bound ? @upper_bound-1 : 0) + @lower_bound : int
     @type.eql?(Float) ? 42.42 : int
   end
 

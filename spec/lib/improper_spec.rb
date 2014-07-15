@@ -32,12 +32,21 @@ describe '#generating' do
       end
 
       describe '#above' do
+        context 'when told to be below 40' do
+          let(:upper_bound) { 40 }
+          describe '#first' do
+            subject { generator.number.below(upper_bound).first }
+
+            it { is_expected.to be <= 40 }
+          end
+        end
+
         context 'when told to be above 90' do
           let(:lower_bound) { 90 }
           describe '#first' do
             subject { generator.number.above(lower_bound).first }
 
-            it { is_expected.to be > 90 }
+            it { is_expected.to be >= 90 }
           end
         end
       end
