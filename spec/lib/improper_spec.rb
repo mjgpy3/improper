@@ -41,5 +41,13 @@ describe '#generating' do
 
       it { is_expected.to eql(2) }
     end
+
+    describe 'all returned elements' do
+      subject { generator.number }
+
+      it 'should be Fixnum' do
+        subject.each { |v| expect(v).to be_a(Fixnum) }
+      end
+    end
   end
 end
