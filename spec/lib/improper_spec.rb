@@ -8,15 +8,19 @@ describe '#generating' do
     let(:quantity) { :a }
 
     describe '#number' do
-      subject { generator.number }
+      describe '#first' do
+        subject { generator.number.first }
 
-      it { is_expected.to be_a(Fixnum) }
+        it { is_expected.to be_a(Fixnum) }
+      end
 
       [Fixnum, Float].each do |type|
         context "when told to generate a #{type}" do
-          subject { generator.number(type) }
+          describe '#first' do
+            subject { generator.number(type).first }
 
-          it { is_expected.to be_a(type) }
+            it { is_expected.to be_a(type) }
+          end
         end
       end
     end
