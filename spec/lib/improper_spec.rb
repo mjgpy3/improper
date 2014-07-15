@@ -17,6 +17,12 @@ describe '#generating' do
 
         it { is_expected.to be_a(Fixnum) }
       end
+
+      context 'when told to generate a Float' do
+        subject { generator.number(Float) }
+
+        it { is_expected.to be_a(Float) }
+      end
     end
   end
 end
