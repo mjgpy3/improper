@@ -8,6 +8,13 @@ describe '#generating' do
     let(:quantity) { :a }
 
     describe '#number' do
+
+      describe '#count' do
+        subject { generator.number.count }
+
+        it { is_expected.to eql(1) }
+      end
+
       describe '#first' do
         subject { generator.number.first }
 
