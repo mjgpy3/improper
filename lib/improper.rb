@@ -5,7 +5,6 @@ class Generator
 
   def number(of_type = Fixnum)
     result = [of_type.eql?(Float) ? 42.42 : 42]
-    result << 42 if @quantity == 2
     result
   end
 end
