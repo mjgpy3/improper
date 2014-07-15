@@ -1,13 +1,17 @@
 class Generator
   def initialize(quantity)
     @quantity = quantity
-    @results = []
-    @type = Fixnum
   end
 
   def number(of_type = Fixnum)
-    @type = of_type
-    self
+    NumericGenerator.new(@quantity, of_type)
+  end
+end
+
+class NumericGenerator
+  def initialize(quantity, type)
+    @quantity = quantity
+    @type = type
   end
 
   def above(lower_bound)
@@ -17,7 +21,7 @@ class Generator
 
   def first
     int = @lower_bound ? rand(0) + @lower_bound : 42
-    [@type.eql?(Float) ? 42.42 : int].first
+    @type.eql?(Float) ? 42.42 : int
   end
 
   def count
