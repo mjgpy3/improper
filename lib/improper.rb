@@ -9,30 +9,27 @@ class Generator
 end
 
 class NumericGenerator
+
+  METHOD_TITLE_TO_POSITION = {
+    'above' => 'lower',
+    'below' => 'upper',
+  }
+
   def initialize(quantity, type)
     @quantity = quantity
     @type = type
     @lower_bound = @upper_bound = false
   end
 
-  def above(lower_bound)
-    @lower_bound = lower_bound
-    self
-  end
-
-  def and_above(lower_bound)
-    @lower_bound = lower_bound
-    self
-  end
-
-  def below(upper_bound)
-    @upper_bound = upper_bound
-    self
-  end
-
-  def and_below(upper_bound)
-    @upper_bound = upper_bound
-    self
+  ['', 'and_'].each do |chain_prefix|
+    ['above', 'below'].each do |place|
+      class_eval <<-BoundsMethods
+        def #{chain_prefix}#{place}(bound)
+          @#{METHOD_TITLE_TO_POSITION[place]}_bound = bound
+          self
+        end
+      BoundsMethods
+    end
   end
 
   def first
