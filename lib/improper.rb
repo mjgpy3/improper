@@ -25,9 +25,15 @@ class NumericGenerator
     self
   end
 
+  def and_below(upper_bound)
+    @upper_bound = upper_bound
+    self
+  end
+
   def first
     int = @upper_bound ? rand(@upper_bound-1) : 42
     int = @lower_bound ? rand(@upper_bound ? @upper_bound-1 : 0) + @lower_bound : int
+    int = @upper_bound && @lower_bound ? rand(@lower_bound..@upper_bound) : int
     @type.eql?(Float) ? 42.42 : int
   end
 
