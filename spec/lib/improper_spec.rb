@@ -39,6 +39,15 @@ describe '#generating' do
 
             it { is_expected.to be <= 40 }
           end
+
+          context 'and told to be above 40' do
+            let(:lower_bound) { 40 }
+            describe '#first' do
+              subject { generator.number.below(upper_bound).and_above(lower_bound).first }
+
+              it { is_expected.to eql(40) }
+            end
+          end
         end
       end
 

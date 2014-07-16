@@ -20,6 +20,11 @@ class NumericGenerator
     self
   end
 
+  def and_above(lower_bound)
+    @lower_bound = lower_bound
+    self
+  end
+
   def below(upper_bound)
     @upper_bound = upper_bound
     self
