@@ -36,8 +36,8 @@ class NumericGenerator
   end
 
   def first
-    int = rand(@lower_bound..@upper_bound)
-    @type.eql?(Float) ? 42.42 : int
+    a_fixnum = rand(@lower_bound..@upper_bound)
+    @type.eql?(Float) ? a_fixnum*rand : a_fixnum
   end
 
   def count
