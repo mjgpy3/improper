@@ -9,6 +9,8 @@ class Generator
 end
 
 class NumericGenerator
+  ARBITRARY_UPPER_BOUND = 123459
+  ARBITRARY_LOWER_BOUND = -123459
 
   METHOD_TITLE_TO_POSITION = {
     'above' => 'lower',
@@ -18,7 +20,8 @@ class NumericGenerator
   def initialize(quantity, type)
     @quantity = quantity
     @type = type
-    @lower_bound = @upper_bound = false
+    @lower_bound = ARBITRARY_LOWER_BOUND
+    @upper_bound = ARBITRARY_UPPER_BOUND
   end
 
   ['', 'and_'].each do |chain_prefix|
@@ -33,9 +36,7 @@ class NumericGenerator
   end
 
   def first
-    int = @upper_bound ? rand(@upper_bound-1) : 42
-    int = @lower_bound ? rand(@upper_bound ? @upper_bound-1 : 0) + @lower_bound : int
-    int = @upper_bound && @lower_bound ? rand(@lower_bound..@upper_bound) : int
+    int = rand(@lower_bound..@upper_bound)
     @type.eql?(Float) ? 42.42 : int
   end
 
