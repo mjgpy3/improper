@@ -9,11 +9,7 @@ describe '#generating' do
 
     describe '#number' do
 
-      describe '#first' do
-        subject { generator.number.first }
-
-        it { is_expected.to be_a(Fixnum) }
-      end
+      specify { expect { |b| generator.number(&b) }.to yield_with_args(kind_of(Fixnum)) }
 
       [Fixnum, Float].each do |type|
         context "when told to generate a #{type}" do

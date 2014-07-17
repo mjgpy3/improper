@@ -3,8 +3,8 @@ class Generator
     @quantity = quantity
   end
 
-  def number(of_type = Fixnum)
-    NumericGenerator.new(@quantity, of_type)
+  def number(of_type = Fixnum, &b)
+    NumericGenerator.new(@quantity, of_type, &b)
   end
 end
 
@@ -22,6 +22,7 @@ class NumericGenerator
     @type = type
     @lower_bound = ARBITRARY_LOWER_BOUND
     @upper_bound = ARBITRARY_UPPER_BOUND
+    yield(generate_random) if block_given?
   end
 
   ['', 'and_'].each do |chain_prefix|
@@ -36,8 +37,14 @@ class NumericGenerator
   end
 
   def first
-    a_fixnum = rand(@lower_bound..@upper_bound)
+    a_fixnum = generate_random
     @type.eql?(Float) ? a_fixnum*rand : a_fixnum
+  end
+
+  private
+
+  def generate_random
+    rand(@lower_bound..@upper_bound)
   end
 end
 
