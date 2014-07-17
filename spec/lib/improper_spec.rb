@@ -30,6 +30,12 @@ describe '#generating' do
             specify { expect { |b| generator.number.below(upper_bound).and_above(lower_bound, &b) }.to yield_control }
             specify { generator.number.below(upper_bound).and_above(lower_bound) { |x| expect(x).to eql(40) } }
           end
+
+          context 'and told to be above 41' do
+            let(:lower_bound) { 41 }
+
+            specify { expect { generator.number.below(upper_bound).and_above(lower_bound) { |_| } }.to raise_error }
+          end
         end
       end
 
