@@ -44,7 +44,8 @@ class NumericGenerator
   private
 
   def generate_random
-    rand(@lower_bound..@upper_bound)
+    a_fixnum = rand(@lower_bound..@upper_bound)
+    @type.eql?(Float) ? a_fixnum*rand : a_fixnum
   end
 end
 
