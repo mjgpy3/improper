@@ -20,19 +20,15 @@ describe '#generating' do
       describe '#below' do
         context 'when told to be below 40' do
           let(:upper_bound) { 40 }
-          describe '#first' do
-            subject { generator.number.below(upper_bound).first }
 
-            it { is_expected.to be <= 40 }
-          end
+          specify { expect { |b| generator.number.below(upper_bound, &b) }.to yield_control }
+          specify { generator.number.below(upper_bound) { |x| expect(x).to be <= 40 } }
 
           context 'and told to be above 40' do
             let(:lower_bound) { 40 }
-            describe '#first' do
-              subject { generator.number.below(upper_bound).and_above(lower_bound).first }
 
-              it { is_expected.to eql(40) }
-            end
+            specify { expect { |b| generator.number.below(upper_bound).and_above(lower_bound, &b) }.to yield_control }
+            specify { generator.number.below(upper_bound).and_above(lower_bound) { |x| expect(x).to eql(40) } }
           end
         end
       end
@@ -40,19 +36,15 @@ describe '#generating' do
       describe '#above' do
         context 'when told to be above 90' do
           let(:lower_bound) { 90 }
-          describe '#first' do
-            subject { generator.number.above(lower_bound).first }
 
-            it { is_expected.to be >= 90 }
-          end
+          specify { expect { |b| generator.number.above(lower_bound, &b) }.to yield_control }
+          specify { generator.number.above(lower_bound) { |x| expect(x).to be >= 90 } }
 
           context 'and told to be below 90' do
             let(:upper_bound) { 90 }
-            describe '#first' do
-              subject { generator.number.above(lower_bound).and_below(upper_bound).first }
 
-              it { is_expected.to eql(90) }
-            end
+            specify { expect { |b| generator.number.above(lower_bound).and_below(upper_bound, &b) }.to yield_control }
+            specify { generator.number.above(lower_bound).and_below(upper_bound) { |x| expect(x).to eql(90) } }
           end
         end
       end

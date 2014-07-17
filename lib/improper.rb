@@ -30,6 +30,7 @@ class NumericGenerator
       class_eval <<-BoundsMethods
         def #{chain_prefix}#{place}(bound)
           @#{METHOD_TITLE_TO_POSITION[place]}_bound = bound
+          yield(generate_random) if block_given?
           self
         end
       BoundsMethods
