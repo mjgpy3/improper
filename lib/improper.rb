@@ -39,10 +39,6 @@ class NumericGenerator
     a_fixnum = rand(@lower_bound..@upper_bound)
     @type.eql?(Float) ? a_fixnum*rand : a_fixnum
   end
-
-  def count
-    @quantity.is_a?(Fixnum) ? @quantity : 1
-  end
 end
 
 def generating(quantity)
