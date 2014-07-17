@@ -37,11 +37,6 @@ class NumericGenerator
     end
   end
 
-  def first
-    a_fixnum = generate_random
-    @type.eql?(Float) ? a_fixnum*rand : a_fixnum
-  end
-
   private
 
   def generate_random
