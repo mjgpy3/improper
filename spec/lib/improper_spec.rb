@@ -8,13 +8,16 @@ describe '#generating' do
     let(:quantity) { :a }
 
     describe '#number' do
-
       specify { expect { |b| generator.number(&b) }.to yield_with_args(kind_of(Fixnum)) }
 
       [Fixnum, Float].each do |type|
         context "when told to generate a #{type}" do
           specify { expect { |b| generator.number(type, &b) }.to yield_with_args(kind_of(type)) }
         end
+      end
+
+      describe '#that_is_even' do
+        specify { |b| generator.number.that_is_even { |x| expect(x).to be_even } }
       end
 
       describe '#below' do

@@ -22,6 +22,7 @@ class NumericGenerator
     @type = type
     @lower_bound = ARBITRARY_LOWER_BOUND
     @upper_bound = ARBITRARY_UPPER_BOUND
+    @ensure_even = false
     yield(generate_random) if block_given?
   end
 
@@ -37,11 +38,18 @@ class NumericGenerator
     end
   end
 
+  def that_is_even
+    @ensure_even = true
+    yield(generate_random) if block_given?
+    self
+  end
+
   private
 
   def generate_random
     raise 'Lower bound cannot exeed upper' if @lower_bound > @upper_bound
     a_fixnum = rand(@lower_bound..@upper_bound)
+    a_fixnum = generate_random if @ensure_even && !a_fixnum.even?
     @type.eql?(Float) ? a_fixnum*rand : a_fixnum
   end
 end
