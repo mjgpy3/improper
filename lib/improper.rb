@@ -26,10 +26,10 @@ class NumericGenerator
   end
 
   ['', 'and_'].each do |chain_prefix|
-    ['above', 'below'].each do |place|
+    METHOD_TITLE_TO_POSITION.each do |place, position|
       class_eval <<-BoundsMethods
         def #{chain_prefix}#{place}(bound)
-          @#{METHOD_TITLE_TO_POSITION[place]}_bound = bound
+          @#{position}_bound = bound
           yield(generate_random) if block_given?
           self
         end
