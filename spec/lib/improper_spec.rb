@@ -17,11 +17,15 @@ describe '#generating' do
       end
 
       describe '#that_is_even' do
-        specify { |b| generator.number.that_is_even { |x| expect(x).to be_even } }
+        specify { generator.number.that_is_even { |x| expect(x).to be_even } }
+
+        describe '#that_is_odd' do
+          specify { expect { generator.number.that_is_even.that_is_odd { |_| } }.to raise_error }
+        end
       end
 
       describe '#that_is_odd' do
-        specify { |b| generator.number.that_is_odd { |x| expect(x).to be_odd } }
+        specify { generator.number.that_is_odd { |x| expect(x).to be_odd } }
       end
 
       describe '#below' do
