@@ -44,13 +44,16 @@ class NumericGenerator
     class_eval <<-QuestionMethods
       def that_is_#{question}
         @ensure_#{question} = true
-        yield(generate_random) if block_given?
-        self
+        yield_or_self
       end
     QuestionMethods
   end
 
   private
+
+  def yield_or_self
+    block_given? ? yield(generate_random) : self
+  end
 
   def generate_random
     guard_inconsistent_properties
