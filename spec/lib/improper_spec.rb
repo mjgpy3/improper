@@ -20,6 +20,10 @@ describe '#generating' do
         specify { |b| generator.number.that_is_even { |x| expect(x).to be_even } }
       end
 
+      describe '#that_is_odd' do
+        specify { |b| generator.number.that_is_odd { |x| expect(x).to be_odd } }
+      end
+
       describe '#below' do
         context 'when told to be below 40' do
           let(:upper_bound) { 40 }
