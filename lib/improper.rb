@@ -11,6 +11,8 @@ end
 class NumericGenerator
   ARBITRARY_UPPER_BOUND = 123459
   ARBITRARY_LOWER_BOUND = -123459
+  BOUNDS_ERROR = 'Lower bound cannot exeed upper'
+  EVEN_AND_ODD_ERROR = 'Cannot ensure even and odd'
 
   METHOD_TITLE_TO_POSITION = {
     'above' => 'lower',
@@ -38,27 +40,33 @@ class NumericGenerator
     end
   end
 
-  def that_is_even
-    @ensure_even = true
-    yield(generate_random) if block_given?
-    self
-  end
-
-  def that_is_odd
-    @ensure_odd = true
-    yield(generate_random) if block_given?
-    self
+  ['even', 'odd'].each do |question|
+    class_eval <<-QuestionMethods
+      def that_is_#{question}
+        @ensure_#{question} = true
+        yield(generate_random) if block_given?
+        self
+      end
+    QuestionMethods
   end
 
   private
 
   def generate_random
-    raise 'Lower bound cannot exeed upper' if @lower_bound > @upper_bound
-    raise 'Cannot ensure even and odd' if @ensure_even && @ensure_odd
+    guard_inconsistent_properties
+
     a_fixnum = rand(@lower_bound..@upper_bound)
-    a_fixnum = generate_random if @ensure_even && !a_fixnum.even?
-    a_fixnum = generate_random if @ensure_odd && !a_fixnum.odd?
+    a_fixnum = generate_random if fails_property?(a_fixnum)
     @type.eql?(Float) ? a_fixnum*rand : a_fixnum
+  end
+
+  def fails_property?(number)
+    (@ensure_even && !number.even?) || (@ensure_odd && !number.odd?)
+  end
+
+  def guard_inconsistent_properties
+    raise BOUNDS_ERROR if @lower_bound > @upper_bound
+    raise EVEN_AND_ODD_ERROR if @ensure_even && @ensure_odd
   end
 end
 
