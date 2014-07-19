@@ -8,28 +8,16 @@ describe Generator::Integer do
 
     specify { expect { |b| described_class.new(quantity, &b) }.to yield_control.twice }
 
-    describe '#that_are_even' do
-      specify { expect { |b| described_class.new(quantity).that_are_even(&b) }.to yield_control.twice }
+    ['that_are_even', 'that_are_odd'].each do |method_name|
+      describe "##{method_name}" do
+        specify { expect { |b| described_class.new(quantity).send(method_name, &b) }.to yield_control.twice }
+      end
     end
 
-    describe '#that_are_odd' do
-      specify { expect { |b| described_class.new(quantity).that_are_odd(&b) }.to yield_control.twice }
-    end
-
-    describe '#below' do
-      specify { expect { |b| described_class.new(quantity).below(5, &b) }.to yield_control.twice }
-    end
-
-    describe '#below' do
-      specify { expect { |b| described_class.new(quantity).above(5, &b) }.to yield_control.twice }
-    end
-
-    describe '#and_below' do
-      specify { expect { |b| described_class.new(quantity).and_below(5, &b) }.to yield_control.twice }
-    end
-
-    describe '#below' do
-      specify { expect { |b| described_class.new(quantity).and_above(5, &b) }.to yield_control.twice }
+    ['below', 'and_below', 'above', 'and_above'].each do |method_name|
+      describe "##{method_name}" do
+        specify { expect { |b| described_class.new(quantity).send(method_name, 5, &b) }.to yield_control.twice }
+      end
     end
   end
 
