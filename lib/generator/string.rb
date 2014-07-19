@@ -3,7 +3,7 @@ module Generator
     def initialize(quantity, &b)
       @range = (' '..'~')
       @size = rand(13)
-      yield('') if block_given?
+      yield(generate_string) if block_given?
     end
 
     def of_size(size)
@@ -21,11 +21,7 @@ module Generator
     private
 
     def generate_string
-      @size.times.reduce('') { |s| s << random_char }
-    end
-
-    def random_char
-      @range.to_a.sample
+      @size.times.reduce('') { |s| s << @range.to_a.sample }
     end
   end
 end
