@@ -5,7 +5,13 @@ module Generator
     end
 
     def of_size(size)
-      yield(size.times.reduce('') { |s| s << 'f' })
+      yield(size.times.reduce('') { |s| s << random_char })
+    end
+
+    private
+
+    def random_char
+      (' '..'~').to_a.sample
     end
   end
 end
