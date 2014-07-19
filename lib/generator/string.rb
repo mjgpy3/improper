@@ -8,7 +8,7 @@ module Generator
     end
 
     def of_sizes(*sizes, &b)
-      @sizes = sizes.send(sizes.first.respond_to?(:to_a) ? 'first' : 'flatten')
+      @sizes = sizes.first.respond_to?(:to_a) ? sizes.first : sizes
       yield_quantity_times_if_block(&b)
       self
     end
