@@ -10,8 +10,10 @@ Gem::Specification.new do |s|
   s.description = 'Your wildest dreams have come true! Property based test generators in Ruby!'
   s.files = ['lib/improper.rb',
              'lib/generator/factory.rb',
+             'lib/generator/integer.rb',
              'spec/lib/improper_spec.rb',
              'spec/lib/generator/factory_spec.rb',
+             'spec/lib/generator/integer_spec.rb',
              'README.md']
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'rubocop'
