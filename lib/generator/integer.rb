@@ -16,11 +16,11 @@ module Generator
     ['', 'and_'].each do |chain_prefix|
       ['above', 'below'].each do |place|
         class_eval <<-BoundsMethods
-        def #{chain_prefix}#{place}(bound)
-          @#{(place == 'above' ? 'lower' : 'upper')}_bound = bound
-          yield(generate_random) if block_given?
-          self
-        end
+          def #{chain_prefix}#{place}(bound, &b)
+            @#{(place == 'above' ? 'lower' : 'upper')}_bound = bound
+            yield_quantity_times_if_block(&b)
+            self
+          end
         BoundsMethods
       end
     end

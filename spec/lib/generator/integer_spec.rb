@@ -15,6 +15,22 @@ describe Generator::Integer do
     describe '#that_are_odd' do
       specify { expect { |b| described_class.new(quantity).that_are_odd(&b) }.to yield_control.twice }
     end
+
+    describe '#below' do
+      specify { expect { |b| described_class.new(quantity).below(5, &b) }.to yield_control.twice }
+    end
+
+    describe '#below' do
+      specify { expect { |b| described_class.new(quantity).above(5, &b) }.to yield_control.twice }
+    end
+
+    describe '#and_below' do
+      specify { expect { |b| described_class.new(quantity).and_below(5, &b) }.to yield_control.twice }
+    end
+
+    describe '#below' do
+      specify { expect { |b| described_class.new(quantity).and_above(5, &b) }.to yield_control.twice }
+    end
   end
 
   context 'when 1 item is generated' do
