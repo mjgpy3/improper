@@ -5,7 +5,7 @@ module Generator
     end
 
     def of_size(size)
-      yield('fooba')
+      yield(size.times.reduce('') { |s| s << 'f' })
     end
   end
 end
