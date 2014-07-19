@@ -55,6 +55,12 @@ describe Generator::String do
     describe '#of_sizes' do
       specify { expect(generator.of_sizes([1, 2, 3])).to be_kind_of(Generator::String) }
 
+      context 'when given a flat array of params' do
+        describe '#size' do
+          specify { generator.of_sizes(3,7) { |x| expect([3, 7]).to include(x.size) } }
+        end
+      end
+
       context 'when the sizes are [5]' do
         let(:sizes) { [5] }
 
