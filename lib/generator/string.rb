@@ -3,7 +3,7 @@ module Generator
     def initialize(quantity, &b)
       @values = (' '..'~')
       @size = rand(13)
-      yield(generate_string) if block_given?
+      quantity.times { yield(generate_string) } if block_given?
     end
 
     def of_size(size)

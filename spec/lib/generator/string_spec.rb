@@ -3,8 +3,8 @@ require './lib/generator/string.rb'
 describe Generator::String do
   let(:generator) { described_class.new(quantity) }
 
-  [2, 3, 1000, 3001].each do |q|
-    xcontext "when #{q} items are generated" do
+  [2].each do |q|
+    context "when #{q} items are generated" do
       let(:quantity) { q }
 
       specify { expect { |b| described_class.new(quantity, &b) }.to yield_control.exactly(q).times }
