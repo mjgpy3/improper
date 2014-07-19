@@ -10,9 +10,8 @@ module Generator
       'below' => 'upper',
     }
 
-    def initialize(quantity, type)
+    def initialize(quantity)
       @quantity = quantity
-      @type = type
       @lower_bound = ARBITRARY_LOWER_BOUND
       @upper_bound = ARBITRARY_UPPER_BOUND
       @ensure_even = @ensure_odd = false
@@ -52,7 +51,7 @@ module Generator
 
       a_fixnum = rand(@lower_bound..@upper_bound)
       a_fixnum = generate_random if fails_property?(a_fixnum)
-      @type.eql?(Float) ? a_fixnum*rand : a_fixnum
+      a_fixnum
     end
 
     def fails_property?(number)
