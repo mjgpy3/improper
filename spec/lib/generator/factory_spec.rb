@@ -1,10 +1,12 @@
-require './lib/generator/factory'
+require './lib/generator/factory.rb'
 
 describe Generator::Factory do
   let(:generator) { described_class.new(:a) }
 
   describe '#number' do
-    specify { expect { |b| generator.number(&b) }.to yield_with_args(kind_of(Fixnum)) }
+    context 'when not given a type to generate' do
+      specify { expect(generator.number).to be_kind_of(Generator::Integer) }
+    end
 
     [Fixnum, Float].each do |type|
       context "when told to generate a #{type}" do

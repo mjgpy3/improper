@@ -1,3 +1,5 @@
+require './lib/generator/integer.rb'
+
 module Generator
   class Factory
     def initialize(quantity)
@@ -5,7 +7,7 @@ module Generator
     end
 
     def number(of_type = Fixnum, &b)
-      NumericGenerator.new(@quantity, of_type, &b)
+      Generator::Integer.new(@quantity, of_type, &b)
     end
   end
 end
