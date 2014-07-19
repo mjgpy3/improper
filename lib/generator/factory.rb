@@ -7,7 +7,7 @@ module Generator
     end
 
     def number(of_type = Fixnum, &b)
-      Generator::Integer.new(@quantity, &b)
+      Generator::Integer.new(@quantity == :a ? 1 : @quantity, &b)
     end
 
     alias_method :numbers, :number
