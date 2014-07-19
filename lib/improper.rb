@@ -1,13 +1,3 @@
-class Generator
-  def initialize(quantity)
-    @quantity = quantity
-  end
-
-  def number(of_type = Fixnum, &b)
-    NumericGenerator.new(@quantity, of_type, &b)
-  end
-end
-
 class NumericGenerator
   ARBITRARY_UPPER_BOUND = 123459
   ARBITRARY_LOWER_BOUND = -123459
@@ -75,5 +65,5 @@ class NumericGenerator
 end
 
 def generating(quantity)
-  Generator.new(quantity)
+  Generator::Factory.new(quantity)
 end
