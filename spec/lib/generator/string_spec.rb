@@ -32,18 +32,25 @@ describe Generator::String do
     end
 
     describe '#from_values' do
+
+      context 'when an array of values is given' do
+        let(:values) { ['f', 'o', 'b', 'a', 'r'] }
+
+        specify { generator.from_values(values) { |x| x.each_char { |c| expect(values).to include(c) } } }
+      end
+
       context 'when given a specific range of just lower letters' do
         let(:range) { 'a'..'z' }
 
         specify { expect(generator.from_values(range)).to be_kind_of(Generator::String) }
 
-        specify { generator.from_values(range) { |x| x.each_char { |c| expect(range).to cover(c) } } }
+        specify { generator.from_values(range) { |x| x.each_char { |c| expect(range).to include(c) } } }
 
         describe '#of_size' do
           context 'when some size is given' do
             let(:size) { 5 }
 
-            specify { generator.from_values(range).of_size(size) { |x| x.each_char { |c| expect(range).to cover(c) } } }
+            specify { generator.from_values(range).of_size(size) { |x| x.each_char { |c| expect(range).to include(c) } } }
           end
         end
       end
