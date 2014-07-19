@@ -1,7 +1,7 @@
 module Generator
   class String
     def initialize(quantity, &b)
-      @range = (' '..'~')
+      @values = (' '..'~')
       @size = rand(13)
       yield(generate_string) if block_given?
     end
@@ -12,8 +12,8 @@ module Generator
       self
     end
 
-    def in_range(range)
-      @range = range
+    def from_values(values)
+      @values = values
       yield(generate_string) if block_given?
       self
     end
@@ -21,7 +21,7 @@ module Generator
     private
 
     def generate_string
-      @size.times.reduce('') { |s| s << @range.to_a.sample }
+      @size.times.reduce('') { |s| s << @values.to_a.sample }
     end
   end
 end

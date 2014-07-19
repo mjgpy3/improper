@@ -31,19 +31,19 @@ describe Generator::String do
       specify { described_class.new(quantity) { |x| expect(x).to be_a_kind_of(String) } }
     end
 
-    describe '#in_range' do
+    describe '#from_values' do
       context 'when given a specific range of just lower letters' do
         let(:range) { 'a'..'z' }
 
-        specify { expect(generator.in_range(range)).to be_kind_of(Generator::String) }
+        specify { expect(generator.from_values(range)).to be_kind_of(Generator::String) }
 
-        specify { generator.in_range(range) { |x| x.each_char { |c| expect(range).to cover(c) } } }
+        specify { generator.from_values(range) { |x| x.each_char { |c| expect(range).to cover(c) } } }
 
         describe '#of_size' do
           context 'when some size is given' do
             let(:size) { 5 }
 
-            specify { generator.in_range(range).of_size(size) { |x| x.each_char { |c| expect(range).to cover(c) } } }
+            specify { generator.from_values(range).of_size(size) { |x| x.each_char { |c| expect(range).to cover(c) } } }
           end
         end
       end
@@ -57,12 +57,12 @@ describe Generator::String do
         context "when the size is #{s}" do
           let(:size) { s }
 
-          describe '#in_range' do
+          describe '#from_values' do
             context 'when some range is given' do
               let(:range) { 'a'..'f' }
 
               describe '#size' do
-                specify { generator.of_size(s).in_range(range) { |x| expect(x.size).to eq(s) } }
+                specify { generator.of_size(s).from_values(range) { |x| expect(x.size).to eq(s) } }
               end
             end
           end
