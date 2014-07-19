@@ -25,5 +25,10 @@ describe Generator::String do
 
   context 'when 1 item is generated' do
     let(:quantity) { 1 }
+
+    context 'when given a block' do
+      specify { expect { |b| described_class.new(quantity, &b) }.to yield_control }
+      specify { described_class.new(quantity) { |x| expect(x).to be_a_kind_of(String) } }
+    end
   end
 end
