@@ -9,6 +9,7 @@ shared_examples 'a numeric generator factory' do
 
       {
         a: 1,
+        an: 1,
         5 => 5,
         20 => 20
       }.each do |q, expected_quantity|
