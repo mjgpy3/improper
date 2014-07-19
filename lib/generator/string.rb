@@ -2,18 +2,20 @@ module Generator
   class String
     def initialize(quantity, &b)
       @values = (' '..'~')
-      @size = rand(13)
+      @sizes = (0..13).to_a
       @quantity = quantity
       yield_quantity_times_if_block(&b)
     end
 
     def of_size(size, &b)
-      @size = size
+      @sizes = [size]
       yield_quantity_times_if_block(&b)
       self
     end
 
-    def of_sizes(sizes)
+    def of_sizes(sizes, &b)
+      @sizes = sizes
+      yield_quantity_times_if_block(&b)
       self
     end
 
@@ -30,7 +32,7 @@ module Generator
     end
 
     def generate_string
-      @size.times.reduce('') { |s| s << @values.to_a.sample }
+      @sizes.sample.times.reduce('') { |s| s << @values.to_a.sample }
     end
   end
 end
