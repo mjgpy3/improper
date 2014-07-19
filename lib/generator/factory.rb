@@ -16,6 +16,7 @@ module Generator
     end
 
     alias_method :numbers, :number
+    alias_method :strings, :string
 
     private
 

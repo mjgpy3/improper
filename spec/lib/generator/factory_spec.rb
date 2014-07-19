@@ -23,21 +23,16 @@ end
 describe Generator::Factory do
   let(:generator) { described_class.new(quantity) }
 
-  describe '#numbers' do
-    subject { generator.numbers }
+  {
+    'numbers' => Generator::Integer,
+    'number' => Generator::Integer,
+    'string' => Generator::String,
+    'strings' => Generator::String,
+  }.each do |method_name, expected_generator|
+    describe "##{method_name}" do
+      subject { generator.send(method_name) }
 
-    it_behaves_like 'a generator factory creation method', Generator::Integer
-  end
-
-  describe '#number' do
-    subject { generator.number }
-
-    it_behaves_like 'a generator factory creation method', Generator::Integer
-  end
-
-  describe '#string' do
-    subject { generator.string }
-
-    it_behaves_like 'a generator factory creation method', Generator::String
+      it_behaves_like 'a generator factory creation method', expected_generator
+    end
   end
 end
