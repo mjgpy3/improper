@@ -30,5 +30,11 @@ describe Generator::String do
       specify { expect { |b| described_class.new(quantity, &b) }.to yield_control }
       specify { described_class.new(quantity) { |x| expect(x).to be_a_kind_of(String) } }
     end
+
+    describe '#of_size' do
+      let(:size) { 5 }
+
+      specify { generator.of_size(size) { |x| expect(x.size).to eq(size) } }
+    end
   end
 end
