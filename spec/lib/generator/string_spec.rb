@@ -38,12 +38,20 @@ describe Generator::String do
         specify { expect(generator.in_range(range)).to be_kind_of(Generator::String) }
 
         specify { generator.in_range(range) { |x| x.each_char { |c| expect(range).to cover(c) } } }
+
+        describe '#of_size' do
+          context 'when some size is given' do
+            let(:size) { 5 }
+
+            specify { generator.in_range(range).of_size(size) { |x| x.each_char { |c| expect(range).to cover(c) } } }
+          end
+        end
       end
     end
 
     describe '#of_size' do
 
-        specify { expect(generator.of_size(4)).to be_kind_of(Generator::String) }
+      specify { expect(generator.of_size(4)).to be_kind_of(Generator::String) }
       [0, 1, 2, 5].each do |s|
         context "when the size is #{s}" do
           let(:size) { s }

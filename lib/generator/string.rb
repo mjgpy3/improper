@@ -1,6 +1,7 @@
 module Generator
   class String
     def initialize(quantity, &b)
+      @range = (' '..'~')
       yield('') if block_given?
     end
 
@@ -10,6 +11,7 @@ module Generator
     end
 
     def in_range(range)
+      @range = range
       yield(range.to_a.sample) if block_given?
       self
     end
@@ -17,7 +19,7 @@ module Generator
     private
 
     def random_char
-      (' '..'~').to_a.sample
+      @range.to_a.sample
     end
   end
 end
