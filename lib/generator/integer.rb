@@ -10,7 +10,7 @@ module Generator
       @upper_bound = ARBITRARY_UPPER_BOUND
       @conditions = [->(x){ !x.nil? }]
       @depth_count = 0
-      yield(generate_random) if block_given?
+      @quantity.times { yield(generate_random) } if block_given?
     end
 
     ['', 'and_'].each do |chain_prefix|
