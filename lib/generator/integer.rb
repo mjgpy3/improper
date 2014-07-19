@@ -26,13 +26,15 @@ module Generator
     end
 
     ['even', 'odd'].each do |question|
-      class_eval <<-QuestionMethods
-      def that_is_#{question}
-        @conditions << ->(x){ x.#{question}? }
-        yield(generate_random) if block_given?
-        self
+      ['is', 'are'].each do |plurality|
+        class_eval <<-QuestionMethods
+          def that_#{plurality}_#{question}
+            @conditions << ->(x){ x.#{question}? }
+            yield(generate_random) if block_given?
+            self
+          end
+        QuestionMethods
       end
-      QuestionMethods
     end
 
     private
