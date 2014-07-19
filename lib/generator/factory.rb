@@ -1,4 +1,4 @@
-require './lib/generator/integer.rb'
+require 'generator/integer.rb'
 
 module Generator
   class Factory
