@@ -61,6 +61,12 @@ describe Generator::String do
         end
       end
 
+      context 'when given a range' do
+        describe '#size' do
+          specify { generator.of_sizes(30..42) { |x| expect(30..42).to include(x.size) } }
+        end
+      end
+
       context 'when the sizes are [5]' do
         let(:sizes) { [5] }
 

@@ -2,17 +2,16 @@ module Generator
   class String
     def initialize(quantity, &b)
       @values = (' '..'~')
-      @sizes = (0..13).to_a
+      @sizes = 0..13
       @quantity = quantity
       yield_quantity_times_if_block(&b)
     end
 
     def of_sizes(*sizes, &b)
-      @sizes = sizes.flatten
+      @sizes = sizes.send(sizes.first.respond_to?(:to_a) ? 'first' : 'flatten')
       yield_quantity_times_if_block(&b)
       self
     end
-
 
     def from_values(values, &b)
       @values = values
@@ -29,7 +28,7 @@ module Generator
     end
 
     def generate_string
-      @sizes.sample.times.reduce('') { |s| s << @values.to_a.sample }
+      @sizes.to_a.sample.times.reduce('') { |s| s << @values.to_a.sample }
     end
   end
 end
