@@ -35,14 +35,19 @@ describe Generator::String do
       context 'when given a specific range of just lower letters' do
         let(:range) { 'a'..'z' }
 
+        specify { expect(generator.in_range(range)).to be_kind_of(Generator::String) }
+
         specify { generator.in_range(range) { |x| x.each_char { |c| expect(range).to cover(c) } } }
       end
     end
 
     describe '#of_size' do
+
+        specify { expect(generator.of_size(4)).to be_kind_of(Generator::String) }
       [0, 1, 2, 5].each do |s|
         context "when the size is #{s}" do
           let(:size) { s }
+
 
           describe '#size' do
             specify { generator.of_size(s) { |x| expect(x.size).to eq(s) } }

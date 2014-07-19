@@ -5,11 +5,13 @@ module Generator
     end
 
     def of_size(size)
-      yield(size.times.reduce('') { |s| s << random_char })
+      yield(size.times.reduce('') { |s| s << random_char }) if block_given?
+      self
     end
 
     def in_range(range)
-      yield(range.to_a.sample)
+      yield(range.to_a.sample) if block_given?
+      self
     end
 
     private
