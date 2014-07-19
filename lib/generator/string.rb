@@ -8,6 +8,10 @@ module Generator
       yield(size.times.reduce('') { |s| s << random_char })
     end
 
+    def in_range(range)
+      yield(range.to_a.sample)
+    end
+
     private
 
     def random_char

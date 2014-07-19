@@ -31,6 +31,14 @@ describe Generator::String do
       specify { described_class.new(quantity) { |x| expect(x).to be_a_kind_of(String) } }
     end
 
+    describe '#in_range' do
+      context 'when given a specific range of just lower letters' do
+        let(:range) { 'a'..'z' }
+
+        specify { generator.in_range(range) { |x| x.each_char { |c| expect(range).to cover(c) } } }
+      end
+    end
+
     describe '#of_size' do
       [0, 1, 2, 5].each do |s|
         context "when the size is #{s}" do
