@@ -3,20 +3,22 @@ require './lib/generator/integer.rb'
 describe Generator::Integer do
   let(:generator) { described_class.new(quantity) }
 
-  context 'when 2 items are generated' do
-    let(:quantity) { 2 }
+  [2, 3, 1000].each do |q|
+    context "when #{q} items are generated" do
+      let(:quantity) { q }
 
-    specify { expect { |b| described_class.new(quantity, &b) }.to yield_control.twice }
+      specify { expect { |b| described_class.new(quantity, &b) }.to yield_control.exactly(q).times }
 
-    ['that_are_even', 'that_are_odd'].each do |method_name|
-      describe "##{method_name}" do
-        specify { expect { |b| described_class.new(quantity).send(method_name, &b) }.to yield_control.twice }
+      ['that_are_even', 'that_are_odd'].each do |method_name|
+        describe "##{method_name}" do
+          specify { expect { |b| described_class.new(quantity).send(method_name, &b) }.to yield_control.exactly(q).times }
+        end
       end
-    end
 
-    ['below', 'and_below', 'above', 'and_above'].each do |method_name|
-      describe "##{method_name}" do
-        specify { expect { |b| described_class.new(quantity).send(method_name, 5, &b) }.to yield_control.twice }
+      ['below', 'and_below', 'above', 'and_above'].each do |method_name|
+        describe "##{method_name}" do
+          specify { expect { |b| described_class.new(quantity).send(method_name, 5, &b) }.to yield_control.exactly(q).times }
+        end
       end
     end
   end
