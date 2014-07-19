@@ -36,7 +36,9 @@ describe Generator::String do
         context "when the size is #{s}" do
           let(:size) { s }
 
-          specify { generator.of_size(s) { |x| expect(x.size).to eq(s) } }
+          describe '#size' do
+            specify { generator.of_size(s) { |x| expect(x.size).to eq(s) } }
+          end
         end
       end
     end
