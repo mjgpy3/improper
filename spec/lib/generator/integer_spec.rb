@@ -9,11 +9,11 @@ describe Generator::Integer do
     specify { expect { |b| described_class.new(quantity, &b) }.to yield_control.twice }
 
     describe '#that_are_even' do
-      specify { expect { |b| described_class.new(quantity, &b).that_are_even }.to yield_control.twice }
+      specify { expect { |b| described_class.new(quantity).that_are_even(&b) }.to yield_control.twice }
     end
 
     describe '#that_are_odd' do
-      specify { expect { |b| described_class.new(quantity, &b).that_are_even }.to yield_control.twice }
+      specify { expect { |b| described_class.new(quantity).that_are_odd(&b) }.to yield_control.twice }
     end
   end
 

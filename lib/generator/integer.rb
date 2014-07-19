@@ -4,13 +4,13 @@ module Generator
     ARBITRARY_LOWER_BOUND = -123459
     ERROR_MESSAGE = 'Difficulty generating Integer. Please ensure properties are correct'
 
-    def initialize(quantity)
+    def initialize(quantity, &b)
       @quantity = quantity
       @lower_bound = ARBITRARY_LOWER_BOUND
       @upper_bound = ARBITRARY_UPPER_BOUND
       @conditions = [->(x){ !x.nil? }]
       @depth_count = 0
-      @quantity.times { yield(generate_random) } if block_given?
+      yield_quantity_times_if_block(&b)
     end
 
     ['', 'and_'].each do |chain_prefix|
@@ -28,9 +28,9 @@ module Generator
     ['even', 'odd'].each do |question|
       ['is', 'are'].each do |plurality|
         class_eval <<-QuestionMethods
-          def that_#{plurality}_#{question}
+          def that_#{plurality}_#{question}(&b)
             @conditions << ->(x){ x.#{question}? }
-            yield(generate_random) if block_given?
+            yield_quantity_times_if_block(&b)
             self
           end
         QuestionMethods
@@ -38,6 +38,10 @@ module Generator
     end
 
     private
+
+    def yield_quantity_times_if_block
+      @quantity.times { yield(generate_random) } if block_given?
+    end
 
     def generate_random
       fail ERROR_MESSAGE if @depth_count > 3000
