@@ -13,6 +13,10 @@ module Generator
       self
     end
 
+    def of_sizes(sizes)
+      self
+    end
+
     def from_values(values, &b)
       @values = values
       yield_quantity_times_if_block(&b)

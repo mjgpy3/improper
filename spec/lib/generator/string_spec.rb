@@ -29,7 +29,6 @@ describe Generator::String do
     end
 
     describe '#from_values' do
-
       context 'when an array of values is given' do
         let(:values) { ['f', 'o', 'b', 'a', 'r'] }
 
@@ -53,8 +52,11 @@ describe Generator::String do
       end
     end
 
-    describe '#of_size' do
+    describe '#of_sizes' do
+      specify { expect(generator.of_sizes([1, 2, 3])).to be_kind_of(Generator::String) }
+    end
 
+    describe '#of_size' do
       specify { expect(generator.of_size(4)).to be_kind_of(Generator::String) }
 
       [0, 1, 2, 5].each do |s|

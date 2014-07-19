@@ -11,9 +11,11 @@ Gem::Specification.new do |s|
   s.files = ['lib/improper.rb',
              'lib/generator/factory.rb',
              'lib/generator/integer.rb',
+             'lib/generator/string.rb',
              'spec/lib/improper_spec.rb',
              'spec/lib/generator/factory_spec.rb',
              'spec/lib/generator/integer_spec.rb',
+             'spec/lib/generator/string_spec.rb',
              'README.md']
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'rubocop'
