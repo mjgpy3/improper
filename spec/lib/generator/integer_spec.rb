@@ -3,7 +3,7 @@ require './lib/generator/integer.rb'
 describe Generator::Integer do
   let(:generator) { described_class.new(quantity) }
 
-  [2, 3, 1000].each do |q|
+  [2, 3, 1000, 3001].each do |q|
     context "when #{q} items are generated" do
       let(:quantity) { q }
 

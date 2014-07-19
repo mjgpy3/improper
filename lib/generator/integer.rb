@@ -9,7 +9,6 @@ module Generator
       @lower_bound = ARBITRARY_LOWER_BOUND
       @upper_bound = ARBITRARY_UPPER_BOUND
       @conditions = [->(x){ !x.nil? }]
-      @depth_count = 0
       yield_quantity_times_if_block(&b)
     end
 
@@ -40,7 +39,11 @@ module Generator
     private
 
     def yield_quantity_times_if_block
-      @quantity.times { yield(generate_random) } if block_given?
+      return unless block_given?
+      @quantity.times do
+        @depth_count = 0
+        yield(generate_random)
+      end
     end
 
     def generate_random
