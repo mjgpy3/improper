@@ -3,7 +3,7 @@ require './lib/generator/string.rb'
 describe Generator::String do
   let(:generator) { described_class.new(quantity) }
 
-  [2].each do |q|
+  [2, 10].each do |q|
     context "when #{q} items are generated" do
       let(:quantity) { q }
 
