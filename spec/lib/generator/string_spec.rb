@@ -9,15 +9,12 @@ describe Generator::String do
 
       specify { expect { |b| described_class.new(quantity, &b) }.to yield_control.exactly(q).times }
 
-      [].each do |method_name|
+      {
+        of_size: 5,
+        from_values: ['a']
+      }.each do |method_name, param|
         describe "##{method_name}" do
-          specify { expect { |b| described_class.new(quantity).send(method_name, &b) }.to yield_control.exactly(q).times }
-        end
-      end
-
-      [].each do |method_name|
-        describe "##{method_name}" do
-          specify { expect { |b| described_class.new(quantity).send(method_name, 5, &b) }.to yield_control.exactly(q).times }
+          specify { expect { |b| described_class.new(quantity).send(method_name, param, &b) }.to yield_control.exactly(q).times }
         end
       end
     end
