@@ -6,15 +6,15 @@ describe Generator::Factory do
   describe '#number' do
     subject { generator.number }
 
-    {
-      [] => 'no type',
-      [Fixnum] => 'a Fixnum'
-    }.each do |params, type|
+    [
+      [[], 'no type', Generator::Integer],
+      [[Fixnum], 'a Fixnum', Generator::Integer],
+    ].each do |params, type, expected_generator|
       context "when told to generate #{type}" do
-        specify { expect(generator.number(*params)).to be_kind_of(Generator::Integer) }
+        specify { expect(generator.number(*params)).to be_kind_of(expected_generator) }
 
         it 'should pass down the quantity' do
-          expect(Generator::Integer).to receive(:new).with(:a)
+          expect(expected_generator).to receive(:new).with(:a)
           subject
         end
       end
