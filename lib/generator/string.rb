@@ -21,6 +21,10 @@ module Generator
 
     alias_method :of_size, :of_sizes
 
+    def to_a
+      @quantity.times.collect { generate_string }
+    end
+
     private
 
     def yield_quantity_times_if_block

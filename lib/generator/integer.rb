@@ -9,6 +9,7 @@ module Generator
       @lower_bound = ARBITRARY_LOWER_BOUND
       @upper_bound = ARBITRARY_UPPER_BOUND
       @conditions = [->(x){ !x.nil? }]
+      @depth_count = 0
       yield_quantity_times_if_block(&b)
     end
 
@@ -34,6 +35,10 @@ module Generator
           end
         QuestionMethods
       end
+    end
+
+    def to_a
+      @quantity.times.collect { generate_random }
     end
 
     private

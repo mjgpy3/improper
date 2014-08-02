@@ -9,6 +9,16 @@ describe Generator::Integer do
 
       specify { expect { |b| described_class.new(quantity, &b) }.to yield_control.exactly(q).times }
 
+      describe '#to_a' do
+        let(:as_array) { described_class.new(quantity).to_a }
+
+        describe '#count' do
+          subject { as_array.count }
+
+          it { is_expected.to eq(quantity) }
+        end
+      end
+
       ['that_are_even', 'that_are_odd'].each do |method_name|
         describe "##{method_name}" do
           specify { expect { |b| described_class.new(quantity).send(method_name, &b) }.to yield_control.exactly(q).times }

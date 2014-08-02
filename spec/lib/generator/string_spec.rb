@@ -9,6 +9,16 @@ describe Generator::String do
 
       specify { expect { |b| described_class.new(quantity, &b) }.to yield_control.exactly(q).times }
 
+      describe '#to_a' do
+        let(:as_array) { described_class.new(quantity).to_a }
+
+        describe '#count' do
+          subject { as_array.count }
+
+          it { is_expected.to eq(quantity) }
+        end
+      end
+
       {
         of_size: 5,
         from_values: ['a']
