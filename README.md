@@ -1,6 +1,8 @@
 improper
 ========
 
+[![Build Status](https://travis-ci.org/mjgpy3/improper.svg?branch=master)](https://travis-ci.org/mjgpy3/improper)
+
 Property based test generators for ruby, yay!
 
 While testing, sometimes we really want to fling a wide variety of values at a particular case.
